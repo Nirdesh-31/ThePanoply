@@ -1,0 +1,166 @@
+{% extends 'store/nav.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <h2 class="ml-2">Our Products</h2>
+    <br>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs bg-light nav-light" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link p-3 active" data-toggle="tab" href="#all">All Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link p-3" data-toggle="tab" href="#bracelet">Bracelets</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link p-3" data-toggle="tab" href="#earring">Earrings</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link p-3" data-toggle="tab" href="#limited">Limited Products</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+
+        <div id="all" class="container tab-pane active"><br>
+            <h3>All Products</h3>
+            <div class="row">
+                {% for product in products%}
+                  <div class="col-lg-3 pt-3 pb-3" style="border: 1px solid #d0f0c0;">
+                      <img class="thumbnail" src="{{product.image.url}}">
+
+                      <div id="{{product.code}}" class="modal">
+                          <span class="close">&times;</span>
+                          <img src="{{product.image.url}}" class="modal-content">
+                      </div>
+
+                      <div class="box-element product">
+                          <h6 style="margin-top:10px">
+                            <strong>Product Code:<br>
+                                <input type="text" value="{{product.code}}" id="myInput0{{product.code}}" class="myInput" style="border: 0px; width:50%" readonly >
+                                <svg id="0{{product.code}}" style="float:right; margin-right: 5px;" onclick="myFunction(this)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16" >
+                                  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                                </svg>
+                              </strong>
+                        </h6>
+                          <hr style="margin-top:10px">
+                          <a class="btn btn-outline-success" onclick="displayModal(this)" id="{{product.code}}">View</a>
+                          <h4 style="display: inline-block; float: right"><strong>Rs {{product.price|floatformat:2}}</strong></h4>
+                      </div>
+                  </div>
+                {% endfor %}
+              </div>
+        </div>
+
+        <div id="bracelet" class="container tab-pane fade"><br>
+          <h3>Bracelets</h3>
+          <div class="row">
+            {% for product in products%}
+            {% if product.name == "Bracelet" or product.name == "bracelet" %}
+              <div class="col-lg-3 pt-3 pb-3" style="border: 1px solid #d0f0c0;">
+                  <img class="thumbnail" src="{{product.image.url}}">
+
+                  <div id="{{product.code}}Bracelet" class="modal">
+                      <span class="close">&times;</span>
+                      <img src="{{product.image.url}}" class="modal-content">
+                  </div>
+                  <div class="box-element product">
+                      <h6 style="margin-top:10px">
+                        <strong>Product Code:<br>
+                            <input type="text" value="{{product.code}}" id="myInput1{{product.code}}" class="myInput" style="border: 0px; width:50%" readonly >
+                            <svg id="1{{product.code}}" style="float:right; margin-right: 5px;" onclick="myFunction(this)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16" >
+                              <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                              <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                            </svg>
+                          </strong>
+                      </h6>
+                      <hr style="margin-top:10px">
+                      <a class="btn btn-outline-success" onclick="displayModal(this)" id="{{product.code}}Bracelet">View</a>
+                      <h4 style="display: inline-block; float: right"><strong>Rs {{product.price|floatformat:2}}</strong></h4>
+                  </div>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div id="earring" class="container tab-pane fade"><br>
+          <h3>Earrings</h3>
+          <div class="row">
+            {% for product in products%}
+            {% if product.name == "earring" or product.name == "Earring" %}
+              <div class="col-lg-3 pt-3 pb-3" style="border: 1px solid #d0f0c0;">
+                  <img class="thumbnail" src="{{product.image.url}}">
+      
+                  <div id="{{product.code}}Earring" class="modal">
+                      <span class="close">&times;</span>
+                      <img src="{{product.image.url}}" class="modal-content">
+                  </div>
+      
+                  <div class="box-element product">
+                      <h6 style="margin-top:10px">
+                        <strong>Product Code:<br>
+                            <input type="text" value="{{product.code}}" id="myInput2{{product.code}}" class="myInput" style="border: 0px; width:50%" readonly >
+                            <svg id="2{{product.code}}" style="float:right; margin-right: 5px;" onclick="myFunction(this)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16" >
+                              <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                              <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                            </svg>
+                          </strong>
+                      </h6>
+                      <hr style="margin-top:10px">
+                      <a class="btn btn-outline-success" onclick="displayModal(this)" id="{{product.code}}Earring">View</a>
+                      <h4 style="display: inline-block; float: right"><strong>Rs {{product.price|floatformat:2}}</strong></h4>
+                  </div>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div id="limited" class="container tab-pane fade"><br>
+          <h3>Limited Products</h3>
+          <div class="row">
+            {% for product in products%}
+            {% if product.name == "limited" or product.name == "Limited" %}
+              <div class="col-lg-3 pt-3 pb-3" style="border: 1px solid #d0f0c0;">
+                  <img class="thumbnail" src="{{product.image.url}}">
+
+                  <div id="{{product.code}}Limited" class="modal">
+                      <span class="close">&times;</span>
+                      <img src="{{product.image.url}}" class="modal-content">
+                  </div>
+
+                  <div class="box-element product">
+                      <h6 style="margin-top:10px"><strong>Product Code:<br>
+                        <input type="text" value="{{product.code}}" id="myInput3{{product.code}}" class="myInput" style="border: 0px; width:50%" readonly >
+                        <svg id="3{{product.code}}" style="float:right; margin-right: 5px;" onclick="myFunction(this)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16" >
+                          <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                          <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                        </svg>
+                      </strong>
+                    </h6>
+                      <hr style="margin-top:10px">
+                      <a class="btn btn-outline-success" onclick="displayModal(this)" id="{{product.code}}Limited">View</a>
+                      <h4 style="display: inline-block; float: right"><strong>Rs {{product.price|floatformat:2}}</strong></h4>
+                  </div>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+</div>
+
+
+<script>
+    function myFunction(e) {
+      var copyText = document.getElementById("myInput"+e.id);
+      copyText.select();
+      copyText.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+    }
+  </script>
+
+{% endblock content %}
